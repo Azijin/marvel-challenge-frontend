@@ -18,7 +18,7 @@ A list of marvel's characters
 
 Details information of a comic
 
-### `yarn eject`
+### Character
 
 Details information from a character and this apparence in comics
 
