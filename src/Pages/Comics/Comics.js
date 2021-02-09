@@ -25,7 +25,7 @@ const Comics = (props) => {
   const fetchData = async () => {
     try {
       const params = {
-        name: debouncedUserSearch,
+        title: debouncedUserSearch,
         limit: limit,
         skip: skip,
       };
@@ -34,7 +34,6 @@ const Comics = (props) => {
         `${process.env.REACT_APP_API_URL}/comics?${queryParams}`
       );
       if (response.status === 200) {
-        console.log("fetch");
         setData(response.data);
         setResult(response.data.count);
         setNotFound(false);
@@ -42,7 +41,6 @@ const Comics = (props) => {
         console.log(response);
       }
     } catch (error) {
-      console.log(error.response);
       if (error.response.status === 404) {
         setNotFound(true);
         setResult(0);

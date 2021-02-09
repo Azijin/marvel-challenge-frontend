@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -45,6 +45,14 @@ library.add(
 
 function App() {
   const [authToken, setAuthToken] = useState(Cookies.get("auth_token") || null);
+  const [favorites, setFavorites] = useState([]);
+  const [localStorage, setLocalStorage] = useState();
+
+  const handleFavorites = (id) => {
+    const newFavorites = [...favorites];
+    favorites.push(id);
+    setFavorites(newFavorites);
+  };
 
   const handleSkip = (range, limit, callback) => {
     callback((Number(range) - 1) * limit);
@@ -66,6 +74,8 @@ function App() {
     Cookies.set("auth_token", token, { expires: 1 });
     setAuthToken(token);
   };
+
+  console.log(favorites);
   return (
     <Router>
       <Header />
@@ -80,7 +90,7 @@ function App() {
           <Comic />
         </Route>
         <Route path="/character/:id">
-          <Character />
+          <Character handleFavorites={handleFavorites} />
         </Route>
         <Route path="/comics">
           <Comics

@@ -41,14 +41,11 @@ const Signin = (props) => {
         });
         return;
       }
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/signup`,
-        {
-          username: username,
-          email: email,
-          password: password,
-        }
-      );
+      const response = await axios.post(`http://localhost:3001/signup`, {
+        username: username,
+        email: email,
+        password: password,
+      });
       console.log(response);
       if (response.status === 200) {
         handleLogin(response.data.token);
@@ -57,14 +54,14 @@ const Signin = (props) => {
       }
     } catch (error) {
       console.log(error.response);
-      if (error.response.status) {
+      /* if (error.response.status) {
         if (error.response.status === 409) {
           setErrorInput({
             error: true,
             message: error.response.data.message,
           });
         }
-      }
+      } */
     }
   };
   return (

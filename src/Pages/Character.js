@@ -6,6 +6,7 @@ import Loading from "../Components/Loading";
 import Card from "../Components/Card";
 
 const Character = (props) => {
+  const { handleFavorites } = props;
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,6 +42,13 @@ const Character = (props) => {
             src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
             alt={character.name}
           />
+          <button
+            onClick={() => {
+              handleFavorites(id);
+            }}
+          >
+            Add to favorite
+          </button>
         </div>
         <section className="character-infos">
           <div className="character-name">

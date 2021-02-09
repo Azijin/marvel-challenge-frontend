@@ -34,7 +34,6 @@ const Characters = (props) => {
         `${process.env.REACT_APP_API_URL}/characters?${queryParams}`
       );
       if (response.status === 200) {
-        console.log("fetch");
         setData(response.data);
         setResult(response.data.count);
         setNotFound(false);
