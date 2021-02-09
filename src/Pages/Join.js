@@ -57,14 +57,14 @@ const Signin = (props) => {
       }
     } catch (error) {
       console.log(error.response);
-      /* if (error.response.status) {
+      if (error.response.status) {
         if (error.response.status === 409) {
           setErrorInput({
             error: true,
             message: error.response.data.message,
           });
         }
-      } */
+      }
     }
   };
   return (
