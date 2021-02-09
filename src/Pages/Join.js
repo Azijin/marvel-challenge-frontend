@@ -33,8 +33,6 @@ const Signin = (props) => {
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
       );
       if (!regex.test(password)) {
-        console.log(password);
-        console.log(regex.test(password));
         setErrorInput({
           error: true,
           message:
@@ -54,7 +52,6 @@ const Signin = (props) => {
       if (response.status === 200) {
         handleLogin(response.data.token);
         sethasJoined(true);
-        console.log("signup");
       }
     } catch (error) {
       console.log(error.response);
