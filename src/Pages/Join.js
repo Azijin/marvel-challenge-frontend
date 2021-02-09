@@ -41,11 +41,14 @@ const Signin = (props) => {
         });
         return;
       }
-      const response = await axios.post(`${process.env.REACT_APP_API_URL/signup`, {
-        username: username,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/signup`,
+        {
+          username: username,
+          email: email,
+          password: password,
+        }
+      );
       console.log(response);
       if (response.status === 200) {
         handleLogin(response.data.token);
