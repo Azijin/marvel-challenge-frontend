@@ -74,7 +74,6 @@ const Signin = (props) => {
         <h3>Thanks for joining {username}</h3>
       ) : (
         <>
-          {" "}
           <Form
             username={username}
             setUsername={setUsername}
@@ -90,7 +89,7 @@ const Signin = (props) => {
             {errorInput.error && (
               <span className="error">{errorInput.message}</span>
             )}
-          </div>{" "}
+          </div>
         </>
       )}
     </div>
