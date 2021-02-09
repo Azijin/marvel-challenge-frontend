@@ -1,0 +1,519 @@
+:root {
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  /*font-family: "Roboto", sans-serif;*/
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 auto;
+  background-color: #202020;
+}
+input,
+button,
+select {
+  outline: none;
+  cursor: pointer;
+}
+/*PAGE404*/
+.page404 {
+  height: 75vh;
+}
+.page404-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.page404-container h2 {
+  color: #ed1d25;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(45px * var(--scale));
+  line-height: 40px;
+  padding: 10px 0;
+}
+.page404-container img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+/*HEADER RULES*/
+header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  background-color: #202020;
+  border: 1px solid #393939;
+}
+header > div:first-child,
+header > div:last-child {
+  flex: 1;
+}
+header .options {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > div:nth-child(3) {
+  flex: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > div {
+  border-left: 1px solid #393939;
+  border-right: 1px solid #393939;
+}
+
+header .options > div:first-child {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header .options span,
+header .options button {
+  color: white;
+  font-size: calc(18px * var(--scale));
+}
+header .options button {
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: transparent;
+  border: none;
+}
+header .options button:hover {
+  color: #ed1d25;
+}
+header .marvel-logo {
+  height: 51px;
+}
+.cover-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 25vh);
+  background-color: #202020;
+}
+.cover {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-image: url("../img/marvel-cover-5.jpg");
+  height: 340px;
+}
+.cover img {
+  object-fit: cover;
+  max-width: 100%;
+}
+/*LOADGIN RULES*/
+.isLoading {
+  margin-top: 15px;
+}
+.isLoading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.isLoading-container > div:first-child > img {
+  border-radius: 2%;
+}
+/*FORMS RULES*/
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  padding: 30px;
+}
+.form-container h2 {
+  font-size: calc(30px * var(--scale));
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 35vh;
+}
+.form-container input {
+  background-color: #202020;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 20px;
+  border-bottom: 1px solid #ed1d25;
+  width: 100%;
+}
+.form-container input::placeholder {
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+}
+.form-container form > div {
+  padding: 20px;
+  width: 100%;
+}
+.password-container {
+  position: relative;
+}
+.display-password {
+  position: absolute;
+  right: 0;
+  top: 40%;
+  color: #ed1d25;
+}
+.form-container button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ed1d25;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  color: white;
+  outline: none;
+  border: none;
+  width: 15vh;
+}
+.error-alerts {
+  margin-top: 10px;
+}
+.error-alerts .error {
+  color: #ed1d25;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+}
+/* SEARCH CONTAINER */
+.search-container {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.input-container {
+  border-bottom: 1px solid #ed1d25;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+.input-container input {
+  border: none;
+  padding: 10px 5px;
+  margin-left: 10px;
+  width: 100%;
+  font-size: calc(20px * var(--scale));
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: #202020;
+  color: white;
+}
+.skip-container {
+  text-transform: uppercase;
+  font-size: calc(15px * var(--scale));
+}
+
+.skip-container select {
+  margin-left: 5px;
+  border: none;
+  background-color: #202020;
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(18px * var(--scale));
+}
+.paging-container {
+  color: white;
+  padding: 0 10px 20px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.paging-container span {
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(14px * var(--scale));
+}
+.paging-total {
+}
+.not-found {
+  color: #ed1d24;
+}
+.pages {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+.pages > span:not(:last-child) {
+  padding-right: 5px;
+}
+.pages > span:not(:first-child) {
+  padding-right: 5px;
+  cursor: pointer;
+}
+.pages > span:not(:first-child):hover {
+  color: #ed1d25;
+}
+/* CARDS RULES */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #202020;
+  justify-content: center;
+  min-height: 40vh;
+}
+.cards-container > a {
+  width: 100%;
+}
+.card {
+  border: 2px solid #393939;
+  border-radius: 5px;
+  margin: 5px 5px 10px 0;
+  cursor: pointer;
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #161616;
+}
+.card:hover {
+  border-color: #ed1d25;
+  transform: scale(1.05);
+}
+.card-picture {
+  display: flex;
+  justify-content: center;
+}
+.card-picture img {
+  width: 100%;
+  object-fit: cover;
+}
+.card-infos {
+  color: white;
+  padding: 10px 0;
+}
+.card-title {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 0;
+}
+.card-title p {
+  font-size: calc(18px * var(--scale));
+}
+.card-description {
+  display: flex;
+  flex-direction: column;
+}
+.card-description p {
+  text-overflow: ellipsis;
+}
+/*CHARACTER PAGE RULES*/
+.character-page {
+  min-height: 80vh;
+}
+.character-container {
+  display: flex;
+  padding: 2% 5%;
+}
+.character-infos h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(35px * var(--scale));
+  text-align: center;
+}
+.character-infos {
+  color: white;
+  padding: 0px 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.character-description {
+  font-size: calc(20px * var(--scale));
+  padding: 1% 0;
+}
+.character-comics {
+  display: flex;
+  flex-direction: column;
+}
+.character-comics > div:first-child {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(20px * var(--scale));
+  text-align: center;
+  text-transform: uppercase;
+}
+.character-comics > div:nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.character-comics .card {
+  cursor: auto;
+}
+
+.character-comics .card-title p {
+  font-size: calc(12px * var(--scale));
+}
+/* FOOTER RULES*/
+.Footer {
+  background-color: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 10vh;
+}
+.signature div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px;
+}
+.signature p {
+  font-size: calc(18px * var(--scale));
+}
+.signature div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.signature p {
+  color: white;
+}
+.signature a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.signature > p > img:first-child,
+.signature > p > img:nth-child(3) {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  animation: App-logo-spin infinite 20s linear;
+}
+.signature > p > a > img {
+  width: 120px;
+  vertical-align: middle;
+}
+.signature :nth-child(2) img {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+.signature div a:link {
+  color: white;
+}
+.signature div a:visited {
+  color: white;
+}
+.signature i {
+  font-family: "Font Awesome 5 Brands" !important;
+  font-size: calc(24px * var(--scale));
+}
+.signature .fa-linkedin {
+  color: #ed1d25;
+}
+.signature .fa-github {
+  color: #ed1d25;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 360px) {
+  :root {
+    --scale: 0.4;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Rules */
+  :root {
+    --scale: 0.7;
+  }
+  header > div:first-child,
+  header > div:last-child {
+    display: none;
+  }
+  header > div {
+    border: none;
+  }
+  header .marvel-logo {
+    height: 35px;
+  }
+  header > div:nth-child(3) {
+    flex: 2 1;
+  }
+  .input-container {
+    width: 55%;
+  }
+  .skip-container label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-infos {
+    padding: 0;
+  }
+  .card-title p {
+    font-size: 8px;
+  }
+  .logo-container {
+    align-items: center;
+  }
+  .Footer {
+    padding-bottom: 10px;
+    height: 10vh;
+  }
+  .signature > p > a > img {
+    width: 90px;
+  }
+  .signature > p > img:nth-child(3) {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (min-width: 768px) {
+  /* Rules */
+  :root {
+    --scale: 0.7;
+  }
+  .card {
+    min-height: 16vh;
+  }
+  .card-infos {
+    padding: 0;
+  }
+}
+@media (min-width: 992px) {
+  :root {
+    --scale: 0.9;
+  }
+}
+@media (min-width: 1200px) {
+  :root {
+    --scale: 1.2;
+  }
+}
+@media (min-width: 1400px) {
+  :root {
+    --scale: 1.3;
+  }
+}
