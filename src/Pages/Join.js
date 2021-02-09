@@ -13,6 +13,7 @@ const Signin = (props) => {
 
   const handleSubmit = async (event) => {
     try {
+      setErrorInput({ error: false });
       event.preventDefault();
       if (username.length <= 3) {
         setErrorInput({
