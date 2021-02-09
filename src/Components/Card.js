@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
   const history = useHistory();
-  const { title, picture, extension, id, description, pageContent } = props;
+  const { title, picture, extension, id, pageContent } = props;
 
   return (
     <div

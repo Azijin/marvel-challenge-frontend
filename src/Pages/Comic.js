@@ -2,7 +2,12 @@ import { useLocation } from "react-router-dom";
 const Comic = (props) => {
   const location = useLocation();
   const comic = location.state;
-
+  let comicDescription = comic.description ? comic.description : false;
+  if (comicDescription) {
+    if (comic.description.indexOf("<br>") !== -1) {
+      comicDescription = comicDescription.replace(/<br>/g, "");
+    }
+  }
   console.log(comic);
   return (
     <div className="character-page">
@@ -18,7 +23,7 @@ const Comic = (props) => {
             <h2>{comic.title}</h2>
           </div>
           <div className="character-description">
-            <p>{comic.description.replace(/<br>/g, "")}</p>
+            <p>{comicDescription}</p>
           </div>
         </section>
       </div>

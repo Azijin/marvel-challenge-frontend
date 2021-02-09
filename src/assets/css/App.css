@@ -352,10 +352,6 @@ header .marvel-logo {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.character-comics .card {
-  cursor: auto;
-}
-
 .character-comics .card-title p {
   font-size: calc(12px * var(--scale));
 }

@@ -69,6 +69,8 @@ const Character = (props) => {
                     title={comic.title}
                     picture={comic.thumbnail.path}
                     extension={comic.thumbnail.extension}
+                    id={comic._id}
+                    pageContent="comic"
                   />
                 );
               })}
