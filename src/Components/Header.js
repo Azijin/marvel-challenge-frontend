@@ -1,25 +1,50 @@
-import navLogo from "../assets/img/nav-logos-insider.png";
 import marvelLog from "../assets/img/marvel-logo.svg";
 import { useHistory, Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 const Header = (props) => {
+  const { account } = props;
   const history = useHistory();
   return (
     <header>
       <div></div>
       <div className="options forms">
         <div>
-          <button
-            onClick={() => {
-              history.push("/join");
-            }}
-          >
-            sign in
-          </button>
+          {account ? (
+            <button
+              onClick={() => {
+                history.push("/account");
+              }}
+            >
+              account
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                history.push("/join");
+              }}
+            >
+              join
+            </button>
+          )}
+
           <span>|</span>
-          <button>join</button>
+          {account ? (
+            <button
+              onClick={() => {
+                history.push("/favorites");
+              }}
+            >
+              favorites
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                history.push("/join");
+              }}
+            >
+              signin
+            </button>
+          )}
         </div>
       </div>
       <div className="logo-container">
