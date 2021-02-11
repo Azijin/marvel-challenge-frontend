@@ -12,6 +12,9 @@ const Form = (props) => {
     handleState,
     btnText,
   } = props;
+  const isInputEmail =
+    email !== undefined && setEmail !== undefined ? true : false;
+  console.log(isInputEmail);
   return (
     <form
       onSubmit={(e) => {
@@ -21,7 +24,9 @@ const Form = (props) => {
       <div className="username-container">
         <input
           type="text"
-          placeholder="CptnAmerica"
+          placeholder={
+            btnText === "join" ? "Username" : "Username or email adress"
+          }
           required
           value={username}
           onChange={(e) => {
@@ -29,17 +34,20 @@ const Form = (props) => {
           }}
         ></input>
       </div>
-      <div className="email-container">
-        <input
-          type="email"
-          placeholder="captn@america.com"
-          required
-          value={email}
-          onChange={(e) => {
-            handleState(e.target.value, setEmail);
-          }}
-        ></input>
-      </div>
+      {isInputEmail && (
+        <div className="email-container">
+          <input
+            type="email"
+            placeholder="my-adress@email.com"
+            required
+            value={email}
+            onChange={(e) => {
+              handleState(e.target.value, setEmail);
+            }}
+          ></input>
+        </div>
+      )}
+
       <InputPassword
         value={password}
         setPassword={setPassword}
