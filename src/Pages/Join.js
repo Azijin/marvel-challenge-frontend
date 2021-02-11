@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Form from "../Components/Form";
 
 const Signin = (props) => {
-  const { handleState, handleLogin } = props;
+  const { account, handleState, handleLogin } = props;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,24 +55,32 @@ const Signin = (props) => {
         sethasJoined(true);
       }
     } catch (error) {
-      console.log(error.response);
-      if (error.response.status) {
-        if (error.response.status === 409) {
-          setErrorInput({
-            error: true,
-            message: error.response.data.message,
-          });
+      console.log(error);
+      if (error) {
+        if (error.status) {
+          if (error.response.status === 409) {
+            setErrorInput({
+              error: true,
+              message: error.response.data.message,
+            });
+          }
         }
       }
     }
   };
-  return (
+  return account ? (
+    <Redirect to="/" />
+  ) : (
     <div className="join form-container">
-      <h2>Join</h2>
       {hasJoined ? (
-        <h3>Thanks for joining {username}</h3>
+        <div>
+          <h2>
+            Thanks for joining <span>{username}</span>
+          </h2>
+        </div>
       ) : (
         <>
+          <h2>Join</h2>
           <Form
             username={username}
             setUsername={setUsername}
