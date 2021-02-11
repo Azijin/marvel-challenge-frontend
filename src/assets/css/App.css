@@ -136,6 +136,9 @@ header .marvel-logo {
   font-family: "Roboto Condensed", sans-serif;
   color: white;
 }
+.form-container h2 > span {
+  color: #ed1d24;
+}
 .form-container form {
   display: flex;
   flex-direction: column;
@@ -239,8 +242,7 @@ header .marvel-logo {
   font-family: "Roboto Condensed", sans-serif;
   font-size: calc(14px * var(--scale));
 }
-.paging-total {
-}
+
 .not-found {
   color: #ed1d24;
 }
@@ -354,6 +356,23 @@ header .marvel-logo {
 }
 .character-comics .card-title p {
   font-size: calc(12px * var(--scale));
+}
+/*ACCOUNT RULES*/
+.user-account {
+  height: 80vh;
+}
+.account-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.account-infos p {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(20px * var(--scale));
+  text-transform: uppercase;
+  color: white;
+}
+.account-infos p > span {
+  color: #ed1d25;
 }
 /* FOOTER RULES*/
 .Footer {
