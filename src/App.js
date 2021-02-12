@@ -13,6 +13,7 @@ import Join from "./Pages/Join";
 import Signin from "./Pages/Signin";
 import Home from "./Components/Home";
 import Account from "./Pages/Account";
+import Favorites from "./Pages/Favorites";
 import Comics from "./Pages/Comics";
 import Comic from "./Pages/Comic";
 import Characters from "./Pages/Characters";
@@ -52,10 +53,19 @@ function App() {
   const [account, setAccount] = useState(null);
   const [favorites, setFavorites] = useState(null);
 
-  const handleFavorites = (id, type) => {
+  const addFavorites = async (id, type) => {
     const newFavorites = { ...favorites };
-    favorites[type].push(id);
-    setFavorites(newFavorites);
+    newFavorites[type].push(id);
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/setting/profil`,
+        { favorites: newFavorites },
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      );
+      if (response.status === 200) {
+        setAccount(response.data.newProfil);
+      }
+    } catch (error) {}
   };
 
   const handleSkip = (range, limit, callback) => {
@@ -97,6 +107,13 @@ function App() {
     }
   }, [authToken]);
 
+  useEffect(() => {
+    if (account) {
+      setFavorites(account.favorites);
+    }
+  }, [account]);
+  console.log(account);
+  console.log(favorites);
   return (
     <Router>
       <Header account={account} />
@@ -126,11 +143,19 @@ function App() {
             getUserAccount={getUserAccount}
           />
         </Route>
+        <Route path="/favorites">
+          <Favorites
+            favorites={favorites}
+            authToken={authToken}
+            handleState={handleState}
+            getUserAccount={getUserAccount}
+          />
+        </Route>
         <Route path="/comic/:id">
-          <Comic />
+          <Comic addFavorites={addFavorites} />
         </Route>
         <Route path="/character/:id">
-          <Character handleFavorites={handleFavorites} />
+          <Character addFavorites={addFavorites} />
         </Route>
         <Route path="/comics">
           <Comics

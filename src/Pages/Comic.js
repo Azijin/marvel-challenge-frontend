@@ -1,5 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 const Comic = (props) => {
+  const { addFavorites } = props;
+
+  const { id } = useParams();
+
   const location = useLocation();
   const comic = location.state;
   let comicDescription = comic.description ? comic.description : false;
@@ -8,21 +12,30 @@ const Comic = (props) => {
       comicDescription = comicDescription.replace(/<br>/g, "");
     }
   }
-  console.log(comic);
+
   return (
-    <div className="character-page">
-      <div className="character-container">
-        <div className="character-avatar">
-          <img
-            src={`${comic.picture}/portrait_uncanny.${comic.extension}`}
-            alt={comic.name}
-          />
+    <div className="results-page">
+      <div className="results-container">
+        <div className="results-avatar">
+          <div>
+            <img
+              src={`${comic.picture}/portrait_uncanny.${comic.extension}`}
+              alt={comic.name}
+            />
+            <button
+              onClick={() => {
+                addFavorites(id, "comics");
+              }}
+            >
+              Add to favorite
+            </button>
+          </div>
         </div>
-        <section className="character-infos">
-          <div className="character-name">
+        <section className="results-infos">
+          <div className="results-name">
             <h2>{comic.title}</h2>
           </div>
-          <div className="character-description">
+          <div className="results-description">
             <p>{comicDescription}</p>
           </div>
         </section>

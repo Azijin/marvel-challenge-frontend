@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import Loading from "../Components/Loading";
 import Card from "../Components/Card";
 
 const Character = (props) => {
-  const { handleFavorites } = props;
+  const { addFavorites } = props;
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,34 +30,35 @@ const Character = (props) => {
     fetchData();
   }, []);
 
-  console.log(data);
   const character = data.data ? data.data : {};
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="character-page">
-      <div className="character-container">
-        <div className="character-avatar">
-          <img
-            src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
-            alt={character.name}
-          />
-          <button
-            onClick={() => {
-              handleFavorites(id);
-            }}
-          >
-            Add to favorite
-          </button>
+    <div className="results-page">
+      <div className="results-container">
+        <div className="results-avatar">
+          <div>
+            <img
+              src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
+              alt={character.name}
+            />
+            <button
+              onClick={() => {
+                addFavorites(id, "characters");
+              }}
+            >
+              Add to favorite
+            </button>
+          </div>
         </div>
-        <section className="character-infos">
-          <div className="character-name">
+        <section className="results-infos">
+          <div className="results-name">
             <h2>{character.name}</h2>
           </div>
-          <div className="character-description">
+          <div className="results-description">
             <p>{character.description}</p>
           </div>
-          <section className="character-comics">
+          <section className="results-related">
             <div>
               <h3>related comics</h3>
             </div>
