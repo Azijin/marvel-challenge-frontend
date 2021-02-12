@@ -13,7 +13,7 @@ const Account = (props) => {
           </div>
           <div className="infos">
             <p>
-              <span>Email adress</span> : {account.username}
+              <span>Email adress</span> : {account.email}
             </p>
           </div>
           <div className="infos">
