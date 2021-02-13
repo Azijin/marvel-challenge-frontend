@@ -47,6 +47,7 @@ header {
   border: 1px solid #393939;
   position: sticky;
   top: 0;
+  z-index: 99999;
 }
 header > div:first-child,
 header > div:last-child {
@@ -144,7 +145,7 @@ header .marvel-logo {
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  width: 35vh;
+  width: 40vh;
 }
 .form-container input {
   background-color: #202020;
@@ -218,6 +219,12 @@ header .marvel-logo {
   background-color: #202020;
   color: white;
 }
+.results {
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 .skip-container {
   text-transform: uppercase;
   font-size: calc(15px * var(--scale));
@@ -231,36 +238,42 @@ header .marvel-logo {
   font-family: "Roboto Condensed", sans-serif;
   font-size: calc(18px * var(--scale));
 }
-.paging-container {
+/*PAGINATION*/
+.pagination-container {
   color: white;
-  padding: 0 10px 20px 10px;
+  padding: 10px 20px 20px 20px;
   display: flex;
   flex-direction: column;
 }
-.paging-container span {
+.pagination-container span,
+.pagination-container li {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
   font-size: calc(14px * var(--scale));
 }
-
-.not-found {
+.pagination-container a {
+  cursor: pointer;
+  outline: none;
+}
+.pagination-container a:hover {
+  color: #ed1d25;
+}
+.actual-page {
   color: #ed1d24;
 }
-.pages {
+.disabled-pagination {
+  display: none;
+}
+.not-found {
+  color: #ed1d24;
+  padding-left: 10px;
+}
+.pagination {
+  flex: 3;
+}
+.pagination ul {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding-top: 10px;
-}
-.pages > span:not(:last-child) {
-  padding-right: 5px;
-}
-.pages > span:not(:first-child) {
-  padding-right: 5px;
-  cursor: pointer;
-}
-.pages > span:not(:first-child):hover {
-  color: #ed1d25;
+  justify-content: space-evenly;
 }
 /* CARDS RULES */
 .cards-container {
@@ -567,9 +580,6 @@ header .marvel-logo {
   /* CARD */
   .card-infos {
     padding: 0;
-  }
-  .card-title p {
-    font-size: 8px;
   }
   .logo-container {
     align-items: center;
