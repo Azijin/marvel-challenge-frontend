@@ -19,7 +19,6 @@ const Comics = (props) => {
   const [skip, setSkip] = useState(0);
   const [results, setResult] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
-  const [pages, setPages] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
   const fetchData = async () => {
@@ -57,10 +56,6 @@ const Comics = (props) => {
     setNumberOfPages(Math.ceil(results / limit));
   }, [results, limit]);
 
-  useEffect(() => {
-    handlePages(numberOfPages, setPages);
-  }, [numberOfPages]);
-
   const comics = data.results ? data.results : [];
 
   return isLoading ? (
@@ -73,14 +68,14 @@ const Comics = (props) => {
           setUserSearch={setUserSearch}
           handleState={handleState}
           setLimit={setLimit}
+          results={results}
+          notFound={notFound}
         />
         <Paging
-          results={results}
-          pages={pages}
           limit={limit}
           handleSkip={handleSkip}
           setSkip={setSkip}
-          notFound={notFound}
+          numberOfPages={numberOfPages}
         />
       </div>
 

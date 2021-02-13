@@ -19,7 +19,7 @@ const Characters = (props) => {
   const [skip, setSkip] = useState(0);
   const [results, setResult] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
-  const [pages, setPages] = useState([]);
+
   const [notFound, setNotFound] = useState(false);
 
   const fetchData = async () => {
@@ -55,10 +55,6 @@ const Characters = (props) => {
   useEffect(() => {
     setNumberOfPages(Math.ceil(results / limit));
   }, [results, limit]);
-
-  useEffect(() => {
-    handlePages(numberOfPages, setPages);
-  }, [numberOfPages]);
 
   const characters = data.results ? data.results : [];
 
