@@ -69,7 +69,7 @@ function App() {
   };
 
   const handleSkip = (range, limit, callback) => {
-    callback((Number(range) - 1) * limit);
+    callback(range * limit);
   };
 
   const handlePages = (numOfPages, setNumOfPages) => {
