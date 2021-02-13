@@ -10,7 +10,7 @@ import SearchInput from "../Components/SearchInput";
 import Paging from "../Components/Paging";
 
 const Comics = (props) => {
-  const { handleSkip, handlePages, handleState } = props;
+  const { handleSkip, handleState } = props;
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [userSearch, setUserSearch] = useState("");
