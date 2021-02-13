@@ -1,30 +1,24 @@
+import ReactPaginate from "react-paginate";
+
 const Paging = (props) => {
-  const { results, pages, handleSkip, limit, setSkip, notFound } = props;
+  const { numberOfPages, handleSkip, limit, setSkip } = props;
   return (
-    <div className="paging-container">
-      <div className="paging-total">
-        <span>{results} results</span>{" "}
-        {notFound && (
-          <span className="not-found">
-            no matches found ! please try an other search
-          </span>
-        )}
-      </div>
-      <div className="pages">
-        <span>pages</span>
-        {pages.map((page, index) => {
-          return (
-            <span
-              value={page}
-              key={index}
-              onClick={(e) => {
-                handleSkip(e.target.textContent, limit, setSkip);
-              }}
-            >
-              {page}
-            </span>
-          );
-        })}
+    <div className="pagination-container">
+      <div className="pagination">
+        <ReactPaginate
+          pageCount={numberOfPages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={9}
+          breakLabel={"..."}
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          containerClassName=""
+          activeLinkClassName="actual-page"
+          disabledClassName="disabled-pagination"
+          onPageChange={(e) => {
+            handleSkip(e.selected, limit, setSkip);
+          }}
+        />
       </div>
     </div>
   );
