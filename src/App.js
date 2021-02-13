@@ -72,14 +72,6 @@ function App() {
     callback(range * limit);
   };
 
-  const handlePages = (numOfPages, setNumOfPages) => {
-    let newPages = [];
-    for (let i = 1; i <= numOfPages; i++) {
-      newPages.push(i);
-    }
-    setNumOfPages(newPages);
-  };
-
   const handleState = (newState, setState) => {
     setState(newState);
   };
@@ -158,18 +150,10 @@ function App() {
           <Character addFavorites={addFavorites} />
         </Route>
         <Route path="/comics">
-          <Comics
-            handleSkip={handleSkip}
-            handlePages={handlePages}
-            handleState={handleState}
-          />
+          <Comics handleSkip={handleSkip} handleState={handleState} />
         </Route>
         <Route path="/characters">
-          <Characters
-            handleSkip={handleSkip}
-            handlePages={handlePages}
-            handleState={handleState}
-          />
+          <Characters handleSkip={handleSkip} handleState={handleState} />
         </Route>
         <Route path="*">
           <Page404 />
