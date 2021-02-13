@@ -39,7 +39,7 @@ const Header = (props) => {
           ) : (
             <button
               onClick={() => {
-                history.push("/join");
+                history.push("/signin");
               }}
             >
               signin

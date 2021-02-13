@@ -38,10 +38,8 @@ const Characters = (props) => {
         setResult(response.data.count);
         setNotFound(false);
         setIsLoading(false);
-        console.log(response);
       }
     } catch (error) {
-      console.log(error.response);
       if (error.response.status === 404) {
         setNotFound(true);
         setResult(0);
@@ -74,14 +72,14 @@ const Characters = (props) => {
           setUserSearch={setUserSearch}
           handleState={handleState}
           setLimit={setLimit}
+          results={results}
+          notFound={notFound}
         />
         <Paging
-          results={results}
-          pages={pages}
           limit={limit}
           handleSkip={handleSkip}
           setSkip={setSkip}
-          notFound={notFound}
+          numberOfPages={numberOfPages}
         />
       </div>
 
