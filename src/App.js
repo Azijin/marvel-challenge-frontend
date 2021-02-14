@@ -53,9 +53,9 @@ function App() {
   const [account, setAccount] = useState(null);
   const [favorites, setFavorites] = useState(null);
 
-  const addFavorites = async (id, type) => {
+  const addFavorites = async (favorite, type) => {
     const newFavorites = { ...favorites };
-    newFavorites[type].push(id);
+    newFavorites[type].push(favorite);
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/setting/profil`,
