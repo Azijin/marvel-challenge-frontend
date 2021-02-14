@@ -44,7 +44,17 @@ const Character = (props) => {
             />
             <button
               onClick={() => {
-                addFavorites(id, "characters");
+                addFavorites(
+                  {
+                    id: id,
+                    name: character.name,
+                    thumbnail: {
+                      path: character.picture,
+                      extension: character.extension,
+                    },
+                  },
+                  "characters"
+                );
               }}
             >
               Add to favorite

@@ -24,7 +24,17 @@ const Comic = (props) => {
             />
             <button
               onClick={() => {
-                addFavorites(id, "comics");
+                addFavorites(
+                  {
+                    id: id,
+                    title: comic.title,
+                    thumbnail: {
+                      path: comic.picture,
+                      extension: comic.extension,
+                    },
+                  },
+                  "comics"
+                );
               }}
             >
               Add to favorite
