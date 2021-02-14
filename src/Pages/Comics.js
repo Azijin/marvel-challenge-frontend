@@ -17,7 +17,7 @@ const Comics = (props) => {
   const [debouncedUserSearch] = useDebounce(userSearch, 1000);
   const [limit, setLimit] = useState(50);
   const [skip, setSkip] = useState(0);
-  const [results, setResult] = useState(0);
+  const [results, setResults] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [notFound, setNotFound] = useState(false);
 
@@ -34,15 +34,14 @@ const Comics = (props) => {
       );
       if (response.status === 200) {
         setData(response.data);
-        setResult(response.data.count);
+        setResults(response.data.count);
         setNotFound(false);
         setIsLoading(false);
-        console.log(response);
       }
     } catch (error) {
       if (error.response.status === 404) {
         setNotFound(true);
-        setResult(0);
+        setResults(0);
         setData({});
       }
     }
@@ -51,6 +50,10 @@ const Comics = (props) => {
   useEffect(() => {
     fetchData();
   }, [debouncedUserSearch, limit, skip]);
+
+  useEffect(() => {
+    setSkip(0);
+  }, [debouncedUserSearch]);
 
   useEffect(() => {
     setNumberOfPages(Math.ceil(results / limit));

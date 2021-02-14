@@ -53,6 +53,10 @@ const Characters = (props) => {
   }, [debouncedUserSearch, limit, skip]);
 
   useEffect(() => {
+    setSkip(0);
+  }, [debouncedUserSearch]);
+
+  useEffect(() => {
     setNumberOfPages(Math.ceil(results / limit));
   }, [results, limit]);
 
