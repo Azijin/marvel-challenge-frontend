@@ -9,7 +9,6 @@ const Signin = (props) => {
   const [accountId, setAccountId] = useState("");
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState({ error: false });
-  const [hasLogged, setHasLogged] = useState(false);
 
   const handleSubmit = async (event) => {
     try {
@@ -24,7 +23,6 @@ const Signin = (props) => {
       );
       if (response.status === 200) {
         handleLogin(response.data.token);
-        setHasLogged(true);
       }
     } catch (error) {
       if (error) {
