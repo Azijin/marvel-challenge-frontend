@@ -10,7 +10,6 @@ const Signin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorInput, setErrorInput] = useState({ error: false });
-  const [hasJoined, sethasJoined] = useState(false);
 
   const handleSubmit = async (event) => {
     try {
@@ -49,10 +48,8 @@ const Signin = (props) => {
           password: password,
         }
       );
-      console.log(response);
       if (response.status === 200) {
         handleLogin(response.data.token);
-        sethasJoined(true);
       }
     } catch (error) {
       console.log(error);
@@ -72,33 +69,23 @@ const Signin = (props) => {
     <Redirect to="/" />
   ) : (
     <div className="join form-container">
-      {hasJoined ? (
-        <div>
-          <h2>
-            Thanks for joining <span>{username}</span>
-          </h2>
-        </div>
-      ) : (
-        <>
-          <h2>Join</h2>
-          <Form
-            username={username}
-            setUsername={setUsername}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            handleState={handleState}
-            handleSubmit={handleSubmit}
-            btnText={"join"}
-          />
-          <div className="error-alerts">
-            {errorInput.error && (
-              <span className="error">{errorInput.message}</span>
-            )}
-          </div>
-        </>
-      )}
+      <h2>Join</h2>
+      <Form
+        username={username}
+        setUsername={setUsername}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        handleState={handleState}
+        handleSubmit={handleSubmit}
+        btnText={"join"}
+      />
+      <div className="error-alerts">
+        {errorInput.error && (
+          <span className="error">{errorInput.message}</span>
+        )}
+      </div>
     </div>
   );
 };
