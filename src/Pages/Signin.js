@@ -44,29 +44,21 @@ const Signin = (props) => {
     <Redirect to="/" />
   ) : (
     <div className="join form-container">
-      {hasLogged ? (
-        <div>
-          <h2>Welcome back</h2>
-        </div>
-      ) : (
-        <>
-          <h2>Sign in</h2>
-          <Form
-            accountId={accountId}
-            setAccountId={setAccountId}
-            password={password}
-            setPassword={setPassword}
-            handleState={handleState}
-            handleSubmit={handleSubmit}
-            btnText={"sign in"}
-          />
-          <div className="error-alerts">
-            {errorLogin.error && (
-              <span className="error">{errorLogin.message}</span>
-            )}
-          </div>
-        </>
-      )}
+      <h2>Sign in</h2>
+      <Form
+        accountId={accountId}
+        setAccountId={setAccountId}
+        password={password}
+        setPassword={setPassword}
+        handleState={handleState}
+        handleSubmit={handleSubmit}
+        btnText={"sign in"}
+      />
+      <div className="error-alerts">
+        {errorLogin.error && (
+          <span className="error">{errorLogin.message}</span>
+        )}
+      </div>
     </div>
   );
 };
