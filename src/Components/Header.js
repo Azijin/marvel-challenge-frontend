@@ -1,12 +1,22 @@
-import marvelLog from "../assets/img/marvel-logo.svg";
+import marvelLogo from "../assets/img/marvel-logo.svg";
 import { useHistory, Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Header = (props) => {
-  const { account } = props;
+  const { account, handleLogout } = props;
   const history = useHistory();
   return (
     <header>
-      <div></div>
+      <div
+        onClick={() => {
+          account && handleLogout();
+        }}
+      >
+        {account && (
+          <FontAwesomeIcon icon="sign-out-alt" onClick={handleLogout} />
+        )}
+      </div>
       <div className="options forms">
         <div>
           {account ? (
@@ -49,7 +59,7 @@ const Header = (props) => {
       </div>
       <div className="logo-container">
         <Link to="/">
-          <img src={marvelLog} alt="marvel logo" className="marvel-logo" />
+          <img src={marvelLogo} alt="marvel logo" className="marvel-logo" />
         </Link>
       </div>
       <div className="options">
