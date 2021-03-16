@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 
 import Form from "../Components/Form";
@@ -45,17 +45,20 @@ const Signin = (props) => {
       <h2>Sign in</h2>
       <Form
         accountId={accountId}
-        setAccountId={setAccountId}
+        setUsername={setAccountId}
         password={password}
         setPassword={setPassword}
         handleState={handleState}
         handleSubmit={handleSubmit}
-        btnText={"sign in"}
+        type={"sign in"}
       />
       <div className="error-alerts">
         {errorLogin.error && (
           <span className="error">{errorLogin.message}</span>
         )}
+      </div>
+      <div>
+        <Link to="/join">You don't have an account ? Join us !</Link>
       </div>
     </div>
   );
