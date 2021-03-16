@@ -5,7 +5,7 @@ const Limit = (props) => {
   return (
     <div className="skip-container">
       <label htmlFor="limit">
-        Number of characters
+        results limit per page
         <select
           name="limit"
           id="limit"
