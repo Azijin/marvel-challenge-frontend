@@ -1,8 +1,15 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useParams, useHistory } from "react-router-dom";
+
 const Comic = (props) => {
-  const { addFavorites } = props;
+  const { favorites, isInFavorites, addFavorite, removeFavorite } = props;
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
 
   const { id } = useParams();
+
+  const history = useHistory();
 
   const location = useLocation();
   const comic = location.state;
@@ -12,6 +19,10 @@ const Comic = (props) => {
       comicDescription = comicDescription.replace(/<br>/g, "");
     }
   }
+
+  useEffect(() => {
+    isInFavorites(id, "comics", setIsFavorite);
+  }, [favorites]);
 
   return (
     <div className="results-page">
@@ -24,17 +35,21 @@ const Comic = (props) => {
             />
             <button
               onClick={() => {
-                addFavorites(
-                  {
-                    id: id,
-                    title: comic.title,
-                    thumbnail: {
-                      path: comic.picture,
-                      extension: comic.extension,
+                if (!favorites) {
+                  history.push("/signin");
+                } else {
+                  addFavorite(
+                    {
+                      id: id,
+                      title: comic.title,
+                      thumbnail: {
+                        path: comic.picture,
+                        extension: comic.extension,
+                      },
                     },
-                  },
-                  "comics"
-                );
+                    "comics"
+                  );
+                }
               }}
             >
               Add to favorite

@@ -25,27 +25,24 @@ import {
   faSearch,
   faEye,
   faEyeSlash,
-  faUserCircle,
-  faBell,
   faHeart,
-  faEnvelope,
   faSortUp,
   faSortDown,
   faPlus,
   faTrash,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import userEvent from "@testing-library/user-event";
 library.add(
   faSearch,
   faEye,
   faEyeSlash,
-  faUserCircle,
-  faBell,
   faHeart,
-  faEnvelope,
   faSortDown,
   faSortUp,
   faPlus,
-  faTrash
+  faTrash,
+  faSignOutAlt
 );
 
 function App() {
@@ -53,19 +50,46 @@ function App() {
   const [account, setAccount] = useState(null);
   const [favorites, setFavorites] = useState(null);
 
-  const addFavorites = async (favorite, type) => {
-    const newFavorites = { ...favorites };
-    newFavorites[type].push(favorite);
+  const handleUpdateAccount = async (dataToUpdate) => {
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/setting/profil`,
-        { favorites: newFavorites },
+        dataToUpdate,
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
       if (response.status === 200) {
         setAccount(response.data.newProfil);
       }
     } catch (error) {}
+  };
+
+  const addFavorite = (favorite, type) => {
+    const newFavorites = { ...favorites };
+    if (newFavorites[type].indexOf(favorite) === -1) {
+      newFavorites[type].push(favorite);
+      handleUpdateAccount({ favorites: newFavorites });
+    }
+  };
+
+  const removeFavorite = (favorite, type) => {
+    const newFavorites = { ...favorites };
+    const indexFavorite = newFavorites[type].indexOf(favorite);
+    if (indexFavorite !== -1) {
+      newFavorites[type].slice(indexFavorite, 1);
+      handleUpdateAccount({ favorites: newFavorites });
+    }
+  };
+
+  const isInFavorites = (favoriteId, type, setIsInFavorite) => {
+    if (favorites) {
+      favorites[type].forEach((favorite) => {
+        if (favorite.id === favoriteId) {
+          setIsInFavorite(true);
+        } else {
+          setIsInFavorite(false);
+        }
+      });
+    }
   };
 
   const handleSkip = (range, limit, callback) => {
@@ -79,6 +103,11 @@ function App() {
   const handleLogin = (token) => {
     Cookies.set("auth_token", token, { expires: 1 });
     setAuthToken(token);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove("auth_token");
+    setAuthToken(null);
   };
 
   const getUserAccount = async () => {
@@ -108,7 +137,7 @@ function App() {
   console.log(favorites);
   return (
     <Router>
-      <Header account={account} />
+      <Header account={account} handleLogout={handleLogout} />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -137,23 +166,48 @@ function App() {
         </Route>
         <Route path="/favorites">
           <Favorites
-            favorites={favorites}
             authToken={authToken}
-            handleState={handleState}
-            getUserAccount={getUserAccount}
+            favorites={favorites}
+            isInFavorites={isInFavorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
           />
         </Route>
         <Route path="/comic/:id">
-          <Comic addFavorites={addFavorites} />
+          <Comic
+            favorites={favorites}
+            isInFavorites={isInFavorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
         </Route>
         <Route path="/character/:id">
-          <Character addFavorites={addFavorites} />
+          <Character
+            favorites={favorites}
+            isInFavorites={isInFavorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
         </Route>
         <Route path="/comics">
-          <Comics handleSkip={handleSkip} handleState={handleState} />
+          <Comics
+            handleSkip={handleSkip}
+            handleState={handleState}
+            favorites={favorites}
+            isInFavorites={isInFavorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
         </Route>
         <Route path="/characters">
-          <Characters handleSkip={handleSkip} handleState={handleState} />
+          <Characters
+            handleSkip={handleSkip}
+            handleState={handleState}
+            favorites={favorites}
+            isInFavorites={isInFavorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
         </Route>
         <Route path="*">
           <Page404 />

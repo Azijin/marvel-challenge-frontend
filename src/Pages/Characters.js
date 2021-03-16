@@ -10,7 +10,15 @@ import SearchInput from "../Components/SearchInput";
 import Paging from "../Components/Paging";
 
 const Characters = (props) => {
-  const { handleSkip, handleState } = props;
+  const {
+    handleSkip,
+    handleState,
+    favorites,
+    isInFavorites,
+    addFavorite,
+    removeFavorite,
+  } = props;
+
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [userSearch, setUserSearch] = useState("");
@@ -88,11 +96,15 @@ const Characters = (props) => {
           return (
             <Card
               key={index}
-              pageContent="character"
+              pageContent="characters"
               title={character.name}
               picture={character.thumbnail.path}
               extension={character.thumbnail.extension}
               id={character._id}
+              favorites={favorites}
+              isInFavorites={isInFavorites}
+              addFavorite={addFavorite}
+              removeFavorite={removeFavorite}
             />
           );
         })}

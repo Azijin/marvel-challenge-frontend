@@ -10,7 +10,15 @@ import SearchInput from "../Components/SearchInput";
 import Paging from "../Components/Paging";
 
 const Comics = (props) => {
-  const { handleSkip, handleState } = props;
+  const {
+    handleSkip,
+    handleState,
+    favorites,
+    isInFavorites,
+    addFavorite,
+    removeFavorite,
+  } = props;
+
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [userSearch, setUserSearch] = useState("");
@@ -92,7 +100,11 @@ const Comics = (props) => {
               extension={comic.thumbnail.extension}
               id={comic._id}
               description={comic.description}
-              pageContent="comic"
+              pageContent="comics"
+              favorites={favorites}
+              isInFavorites={isInFavorites}
+              addFavorite={addFavorite}
+              removeFavorite={removeFavorite}
             />
           );
         })}
