@@ -72,6 +72,18 @@ header > div:first-child,
 header > div:last-child {
   flex: 1;
 }
+header > div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > div:first-child svg {
+  color: white;
+  font-size: calc(18px * var(--scale));
+}
+header > div:first-child svg:hover {
+  color: #ed1d25;
+}
 header .options {
   flex: 2;
   display: flex;
@@ -129,7 +141,7 @@ header .marvel-logo {
   object-fit: cover;
   max-width: 100%;
 }
-/*LOADGIN RULES*/
+/*LOADING RULES*/
 .isLoading {
   margin-top: 15px;
 }
