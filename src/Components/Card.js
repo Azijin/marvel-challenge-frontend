@@ -17,6 +17,19 @@ const Card = (props) => {
     removeFavorite,
   } = props;
 
+  const dataForFavorite = {
+    id: id,
+    thumbnail: {
+      path: picture,
+      extension: extension,
+    },
+  };
+  if (pageContent === "characters") {
+    dataForFavorite.name = title;
+  } else if (pageContent === "comics") {
+    dataForFavorite.title = title;
+  }
+
   const [isFavorite, setIsFavorite] = useState(false);
   const classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
 
@@ -35,29 +48,9 @@ const Card = (props) => {
             history.push("/signin");
           } else {
             if (!isFavorite) {
-              addFavorite(
-                {
-                  id: id,
-                  title: title,
-                  thumbnail: {
-                    path: picture,
-                    extension: extension,
-                  },
-                },
-                pageContent
-              );
+              addFavorite(dataForFavorite, pageContent);
             } else {
-              removeFavorite(
-                {
-                  id: id,
-                  title: title,
-                  thumbnail: {
-                    path: picture,
-                    extension: extension,
-                  },
-                },
-                pageContent
-              );
+              removeFavorite(dataForFavorite, pageContent);
             }
           }
         }}

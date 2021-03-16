@@ -10,7 +10,7 @@ const Form = (props) => {
     setPassword,
     handleSubmit,
     handleState,
-    btnText,
+    type,
   } = props;
   const isInputEmail =
     email !== undefined && setEmail !== undefined ? true : false;
@@ -21,31 +21,33 @@ const Form = (props) => {
         handleSubmit(e);
       }}
     >
-      <div className="username-container">
+      <label className="username-container" htmlFor="username">
+        {type === "join" ? "Username" : "Account"}
         <input
+          id="username"
           type="text"
-          placeholder={
-            btnText === "join" ? "Username" : "Username or email adress"
-          }
+          placeholder={type === "join" ? "Vision" : "Username or email adress"}
           required
           value={username}
           onChange={(e) => {
             handleState(e.target.value, setUsername);
           }}
         ></input>
-      </div>
+      </label>
       {isInputEmail && (
-        <div className="email-container">
+        <label className="email-container" htmlFor="email">
+          Email adress
           <input
+            id="email"
             type="email"
-            placeholder="my-adress@email.com"
+            placeholder="iam@groot.com"
             required
             value={email}
             onChange={(e) => {
               handleState(e.target.value, setEmail);
             }}
           ></input>
-        </div>
+        </label>
       )}
 
       <InputPassword
@@ -53,7 +55,7 @@ const Form = (props) => {
         setPassword={setPassword}
         handleState={handleState}
       />
-      <button type="submit">{btnText}</button>
+      <button type="submit">{type}</button>
     </form>
   );
 };
