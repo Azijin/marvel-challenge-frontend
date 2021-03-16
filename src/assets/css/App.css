@@ -2,11 +2,30 @@
   box-sizing: border-box;
 }
 body {
-  /*font-family: "Roboto", sans-serif;*/
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0 auto;
   background-color: #202020;
+}
+h2 {
+  color: #ed1d25;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(24px * var(--scale));
+  text-transform: uppercase;
+}
+p {
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(20px * var(--scale));
+  text-transform: uppercase;
+}
+a {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: calc(20px * var(--scale));
+  text-transform: uppercase;
+  color: #ed1d25;
+  text-decoration: none;
 }
 input,
 button,
@@ -154,16 +173,21 @@ header .marvel-logo {
   color: white;
   padding: 20px;
   border-bottom: 1px solid #ed1d25;
+  font-family: "Roboto Condensed", sans-serif;
   width: 100%;
+}
+.form-container form > label {
+  padding: 20px;
+  width: 100%;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  color: #ed1d25;
 }
 .form-container input::placeholder {
   font-family: "Roboto Condensed", sans-serif;
   color: white;
 }
-.form-container form > div {
-  padding: 20px;
-  width: 100%;
-}
+
 .password-container {
   position: relative;
 }
@@ -192,6 +216,9 @@ header .marvel-logo {
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
 }
+.form-container a {
+  font-size: calc(12px * var(--scale));
+}
 /* SEARCH CONTAINER */
 .search-container {
   padding: 30px;
@@ -219,24 +246,27 @@ header .marvel-logo {
   background-color: #202020;
   color: white;
 }
+.input-container > svg {
+  font-size: calc(20px * var(--scale));
+}
 .results {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
   display: flex;
   flex-direction: column;
+  font-size: calc(15px * var(--scale));
 }
+
 .skip-container {
   text-transform: uppercase;
   font-size: calc(15px * var(--scale));
 }
-
 .skip-container select {
-  margin-left: 5px;
   border: none;
   background-color: #202020;
   color: white;
   font-family: "Roboto Condensed", sans-serif;
-  font-size: calc(18px * var(--scale));
+  font-size: calc(15px * var(--scale));
 }
 /*PAGINATION*/
 .pagination-container {
@@ -254,11 +284,12 @@ header .marvel-logo {
 .pagination-container a {
   cursor: pointer;
   outline: none;
+  color: white;
 }
 .pagination-container a:hover {
   color: #ed1d25;
 }
-.actual-page {
+.pagination-container .actual-page {
   color: #ed1d24;
 }
 .disabled-pagination {
@@ -296,6 +327,7 @@ header .marvel-logo {
   justify-content: space-between;
   flex-direction: column;
   background-color: #161616;
+  position: relative;
 }
 .card:hover {
   border-color: #ed1d25;
@@ -305,13 +337,31 @@ header .marvel-logo {
   display: flex;
   justify-content: center;
 }
+.favorite-container {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  margin: 5px;
+}
+.favorite-container svg {
+  font-size: calc(20px * var(--scale));
+}
+.favorite-container svg:hover {
+  transform: scale(1.2);
+}
+.is-favorite {
+  color: #ed1d25;
+}
+.not-favorite {
+  color: #101010;
+}
 .card-picture img {
   width: 100%;
   object-fit: cover;
 }
 .card-infos {
   color: white;
-  padding: 10px 0;
 }
 .card-title {
   text-transform: uppercase;
@@ -328,7 +378,7 @@ header .marvel-logo {
 .card-description p {
   text-overflow: ellipsis;
 }
-/* PAGE RULES*/
+/* PAGE RULES */
 .results-page {
   min-height: 80vh;
 }
@@ -398,7 +448,7 @@ header .marvel-logo {
 .results-related .card-title p {
   font-size: calc(12px * var(--scale));
 }
-/*ACCOUNT RULES*/
+/* ACCOUNT RULES */
 .user-account {
   height: 80vh;
 }
@@ -415,7 +465,39 @@ header .marvel-logo {
 .account-infos p > span {
   color: #ed1d25;
 }
-/* FOOTER RULES*/
+/* FAVORITES RULES */
+.favorites-page {
+  height: 80vh;
+  padding: 0 20px;
+}
+.favorites-page {
+  display: flex;
+  justify-content: space-between;
+}
+.favorites-page section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding-top: 20px;
+}
+.favorites-page > section:first-child {
+  padding-right: 10px;
+}
+.favorites-page > section:last-child {
+  padding-left: 10px;
+}
+.favorites-page section > p {
+  padding: 10px 0;
+}
+.favorites-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+/* FOOTER RULES */
 .Footer {
   background-color: #202020;
   display: flex;
@@ -513,9 +595,7 @@ header .marvel-logo {
   .input-container {
     width: 45%;
   }
-  .input-container > svg {
-    font-size: 10px;
-  }
+
   .skip-container > label {
     display: flex;
     align-items: center;
@@ -596,18 +676,19 @@ header .marvel-logo {
   .signature > p > a > img {
     width: 90px;
   }
+  .signature > p > img:first-child,
   .signature > p > img:nth-child(3) {
     width: 30px;
     height: 30px;
   }
 }
 @media (min-width: 768px) {
-  /* Rules */
   :root {
-    --scale: 0.7;
+    --scale: 0.9;
   }
   .card {
     min-height: 16vh;
+    width: 15%;
   }
   .card-infos {
     padding: 0;
@@ -623,7 +704,7 @@ header .marvel-logo {
 }
 @media (min-width: 992px) {
   :root {
-    --scale: 0.9;
+    --scale: 1;
   }
 }
 @media (min-width: 1200px) {
@@ -634,5 +715,12 @@ header .marvel-logo {
 @media (min-width: 1400px) {
   :root {
     --scale: 1.3;
+  }
+  header .marvel-logo {
+    height: 55px;
+  }
+
+  .card {
+    width: 10%;
   }
 }
