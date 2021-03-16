@@ -13,11 +13,13 @@ const InputPassword = (props) => {
     }
   };
   return (
-    <div className="password-container">
+    <label className="password-container" htmlFor="password">
+      Password
       <input
+        id="password"
         type={showPassword ? "text" : "password"}
         name="password"
-        placeholder="Password"
+        placeholder="StR0ng-Pa55w0rD-L1k3-HulK"
         required
         value={value}
         onChange={(e) => {
@@ -31,7 +33,7 @@ const InputPassword = (props) => {
         icon={showPassword ? "eye-slash" : "eye"}
         onClick={handleShowPassword}
       />
-    </div>
+    </label>
   );
 };
 export default InputPassword;
