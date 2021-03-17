@@ -59,7 +59,7 @@ select {
 
 /*HEADER RULES*/
 header {
-  height: 10vh;
+  height: 15vh;
   display: flex;
   justify-content: space-around;
   background-color: #202020;
@@ -122,7 +122,7 @@ header .options button:hover {
   color: #ed1d25;
 }
 header .marvel-logo {
-  height: calc(80px * var(--scale));
+  height: calc(40px * var(--scale));
 }
 .cover-container {
   display: flex;
@@ -590,6 +590,12 @@ header .marvel-logo {
   :root {
     --scale: 0.3;
   }
+  header {
+    height: 5vh;
+  }
+  .search-container {
+    padding: 10px 15px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -606,7 +612,9 @@ header .marvel-logo {
   :root {
     --scale: 0.5;
   }
-
+  header {
+    height: 6vh;
+  }
   /* SEARCH */
   .search-container {
     padding: 10px 15px;
@@ -655,7 +663,9 @@ header .marvel-logo {
     --scale: 0.8;
   }
   /* HEADER */
-
+  header {
+    height: 7vh;
+  }
   header > div:nth-child(3) {
     flex: 2 1;
   }
@@ -696,6 +706,9 @@ header .marvel-logo {
   :root {
     --scale: 0.9;
   }
+  header {
+    height: 8vh;
+  }
   .card {
     min-height: 16vh;
     width: 15%;
@@ -716,10 +729,16 @@ header .marvel-logo {
   :root {
     --scale: 1;
   }
+  header {
+    height: 9vh;
+  }
 }
 @media (min-width: 1200px) {
   :root {
     --scale: 1.2;
+  }
+  header {
+    height: 13vh;
   }
 }
 @media (min-width: 1400px) {
