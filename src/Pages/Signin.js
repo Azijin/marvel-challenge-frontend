@@ -45,9 +45,12 @@ const Signin = (props) => {
   ) : (
     <div className="join form-container">
       <h2>Sign in</h2>
-      <p>
+      <p id="test-app-message">
         <em>
-          This is a demo application, just click to sign in to try the app
+          This is a demo application. To test the user experience while logged
+          in, simply click on "Sign in".
+          <br />
+          While logged in, you will be able to add / remove favorites
         </em>
       </p>
       <Form

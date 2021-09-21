@@ -175,6 +175,9 @@ header .marvel-logo {
   height: 80vh;
   padding: 30px;
 }
+.form-container #test-app-message {
+  font-size: calc(12px * var(--scale));
+}
 .form-container input:disabled {
   cursor: not-allowed;
 }
