@@ -1,25 +1,33 @@
 import { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import axios from "axios";
 
 import Form from "../Components/Form";
+import Modal from "../Components/Modal";
 
 const Signin = (props) => {
-  const { account, handleState, handleLogin } = props;
+  const { account, handleState } = props;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorInput, setErrorInput] = useState({ error: false });
+  const [isClickable, setIsClickable] = useState(true);
+  const [isModalDisplay, setIsModalDisplay] = useState(false);
+
+  const handleModalDisplay = () => {
+    setIsModalDisplay(!isModalDisplay);
+  };
 
   const handleSubmit = async (event) => {
     try {
-      setErrorInput({ error: false });
       event.preventDefault();
+      setErrorInput({ error: false });
+      setIsClickable(false);
       if (username.length <= 3) {
         setErrorInput({
           error: true,
           message: "your username must be at least 4 charaters",
         });
+        setIsClickable(true);
         return;
       }
       if (password.length < 5) {
@@ -27,10 +35,11 @@ const Signin = (props) => {
           error: true,
           message: "your password must be at least 8 charaters",
         });
+        setIsClickable(true);
         return;
       }
       let regex = new RegExp(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*-_])(?=.{8,})"
       );
       if (!regex.test(password)) {
         setErrorInput({
@@ -38,21 +47,12 @@ const Signin = (props) => {
           message:
             "your password must contain a number, an uppercase letter, a lowercase letter and a special character",
         });
+        setIsClickable(true);
         return;
       }
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/signup`,
-        {
-          username: username,
-          email: email,
-          password: password,
-        }
-      );
-      if (response.status === 200) {
-        handleLogin(response.data.token);
-      }
+      handleModalDisplay();
     } catch (error) {
-      console.log(error);
+      setIsClickable(true);
       if (error) {
         if (error.status) {
           if (error.response.status === 409) {
@@ -69,6 +69,11 @@ const Signin = (props) => {
     <Redirect to="/" />
   ) : (
     <div className="join form-container">
+      <Modal
+        isModalDisplay={isModalDisplay}
+        handleModalDisplay={handleModalDisplay}
+        username={username}
+      />
       <h2>Join</h2>
       <Form
         username={username}
@@ -80,6 +85,7 @@ const Signin = (props) => {
         handleState={handleState}
         handleSubmit={handleSubmit}
         type={"join"}
+        isClickable={isClickable}
       />
       <div className="error-alerts">
         {errorInput.error && (

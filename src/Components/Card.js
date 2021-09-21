@@ -1,3 +1,16 @@
+/* 
+card component used in characters, comics and favorites pages.
+the page Content prop's is used to determine:
+- what type of content the map should display
+- navigation to the page
+- the data object to save it as favorites
+- the add to favorites function
+
+the isFavorite state manage 
+- the displays of the card if the comic or character is in favorites
+- which function should be triggered: add or remove favorites
+*/
+
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -17,6 +30,8 @@ const Card = (props) => {
     removeFavorite,
   } = props;
 
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const dataForFavorite = {
     id: id,
     thumbnail: {
@@ -24,19 +39,17 @@ const Card = (props) => {
       extension: extension,
     },
   };
+
   if (pageContent === "characters") {
     dataForFavorite.name = title;
   } else if (pageContent === "comics") {
     dataForFavorite.title = title;
   }
 
-  const [isFavorite, setIsFavorite] = useState(false);
-  const classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
+  let classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
 
   useEffect(() => {
-    if (favorites) {
-      isInFavorites(id, pageContent, setIsFavorite);
-    }
+    isInFavorites(id, pageContent, setIsFavorite);
   }, [favorites]);
 
   return (
@@ -50,7 +63,7 @@ const Card = (props) => {
             if (!isFavorite) {
               addFavorite(dataForFavorite, pageContent);
             } else {
-              removeFavorite(dataForFavorite, pageContent);
+              removeFavorite(id, pageContent);
             }
           }
         }}

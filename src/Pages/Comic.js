@@ -5,20 +5,31 @@ const Comic = (props) => {
   const { favorites, isInFavorites, addFavorite, removeFavorite } = props;
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
-
   const { id } = useParams();
 
   const history = useHistory();
 
   const location = useLocation();
   const comic = location.state;
+
   let comicDescription = comic.description ? comic.description : false;
+
   if (comicDescription) {
     if (comic.description.indexOf("<br>") !== -1) {
       comicDescription = comicDescription.replace(/<br>/g, "");
     }
   }
+
+  const favoriteData = {
+    id: id,
+    title: comic.title,
+    thumbnail: {
+      path: comic.picture,
+      extension: comic.extension,
+    },
+  };
+
+  const btnContent = isFavorite ? "Remove favorite" : "Add favorite";
 
   useEffect(() => {
     isInFavorites(id, "comics", setIsFavorite);
@@ -33,26 +44,19 @@ const Comic = (props) => {
               src={`${comic.picture}/portrait_uncanny.${comic.extension}`}
               alt={comic.name}
             />
+            {}
             <button
               onClick={() => {
                 if (!favorites) {
                   history.push("/signin");
                 } else {
-                  addFavorite(
-                    {
-                      id: id,
-                      title: comic.title,
-                      thumbnail: {
-                        path: comic.picture,
-                        extension: comic.extension,
-                      },
-                    },
-                    "comics"
-                  );
+                  isFavorite
+                    ? removeFavorite(id, "comics")
+                    : addFavorite(favoriteData, "comics");
                 }
               }}
             >
-              Add to favorite
+              {btnContent}
             </button>
           </div>
         </div>

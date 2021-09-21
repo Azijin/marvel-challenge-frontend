@@ -11,10 +11,9 @@ const Character = (props) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const history = useHistory();
-
-  const classNameFavorite = isFavorite ? "is-favorite" : "not-favorite";
 
   const { id } = useParams();
 
@@ -23,15 +22,18 @@ const Character = (props) => {
       const response = await axios.get(
         `https://marvel-challeng.herokuapp.com/comics/${id}`
       );
-      console.log(response);
       if (response.status === 200) {
         setData(response.data);
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error.response);
+      setIsError(true);
     }
   };
+
+  const character = data.data ? data.data : {};
+
+  const btnContent = isFavorite ? "Remove favorite" : "Add favorite";
 
   useEffect(() => {
     fetchData();
@@ -39,11 +41,12 @@ const Character = (props) => {
 
   useEffect(() => {
     isInFavorites(id, "characters", setIsFavorite);
-  }, [favorites, data]);
+  }, [favorites]);
 
-  const character = data.data ? data.data : {};
   return isLoading ? (
     <Loading />
+  ) : isError ? (
+    <Redirect to="/error" />
   ) : (
     <div className="results-page">
       <div className="results-container">
@@ -58,21 +61,23 @@ const Character = (props) => {
                 if (!favorites) {
                   history.push("/signin");
                 } else {
-                  addFavorite(
-                    {
-                      id: id,
-                      name: character.name,
-                      thumbnail: {
-                        path: character.thumbnail.path,
-                        extension: character.thumbnail.extension,
-                      },
-                    },
-                    "characters"
-                  );
+                  isFavorite
+                    ? removeFavorite(id, "characters")
+                    : addFavorite(
+                        {
+                          id: id,
+                          name: character.name,
+                          thumbnail: {
+                            path: character.thumbnail.path,
+                            extension: character.thumbnail.extension,
+                          },
+                        },
+                        "characters"
+                      );
                 }
               }}
             >
-              Add to favorite
+              {btnContent}
             </button>
           </div>
         </div>
@@ -92,11 +97,15 @@ const Character = (props) => {
                 return (
                   <Card
                     key={index}
+                    pageContent="comics"
                     title={comic.title}
                     picture={comic.thumbnail.path}
                     extension={comic.thumbnail.extension}
                     id={comic._id}
-                    pageContent="characters"
+                    favorites={favorites}
+                    isInFavorites={isInFavorites}
+                    addFavorite={addFavorite}
+                    removeFavorite={removeFavorite}
                   />
                 );
               })}

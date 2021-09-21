@@ -1,6 +1,10 @@
+/*
+Account page
+*/
+
 import { Redirect } from "react-router-dom";
 const Account = (props) => {
-  const { account } = props;
+  const { account, handleLogout } = props;
 
   return account ? (
     <div className="user-account">
@@ -16,25 +20,14 @@ const Account = (props) => {
               <span>Email adress</span> : {account.email}
             </p>
           </div>
-          <div className="infos">
-            <p>
-              <span>Phone</span> : {account.phone}
-            </p>
-          </div>
-          <div className="infos">
-            <p>
-              <span>Adress</span> : {account.adress}
-            </p>
-          </div>
-          <div className="infos">
-            <p>
-              <span>City</span> : {account.city}
-            </p>
-            <div className="infos">
-              <p>
-                <span>Country</span> : {account.country}
-              </p>
-            </div>
+          <div className="log-out">
+            <button
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Log out
+            </button>
           </div>
         </section>
       </div>

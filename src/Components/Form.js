@@ -11,10 +11,14 @@ const Form = (props) => {
     handleSubmit,
     handleState,
     type,
+    isClickable,
   } = props;
+
   const isInputEmail =
     email !== undefined && setEmail !== undefined ? true : false;
-  console.log(isInputEmail);
+  const isDisabled = type == "join" ? "" : "disabled";
+  const btnClass = isClickable ? "" : "btn-not-clickable";
+
   return (
     <form
       onSubmit={(e) => {
@@ -28,9 +32,10 @@ const Form = (props) => {
           type="text"
           placeholder={type === "join" ? "Vision" : "Username or email adress"}
           required
+          disabled={isDisabled}
           value={username}
           onChange={(e) => {
-            handleState(e.target.value, setUsername);
+            type == "join" && handleState(e.target.value, setUsername);
           }}
         ></input>
       </label>
@@ -44,7 +49,7 @@ const Form = (props) => {
             required
             value={email}
             onChange={(e) => {
-              handleState(e.target.value, setEmail);
+              type == "join" && handleState(e.target.value, setEmail);
             }}
           ></input>
         </label>
@@ -54,8 +59,12 @@ const Form = (props) => {
         value={password}
         setPassword={setPassword}
         handleState={handleState}
+        isDisabled={isDisabled}
+        type={type}
       />
-      <button type="submit">{type}</button>
+      <button type="submit" disabled={!isClickable} className={btnClass}>
+        {type}
+      </button>
     </form>
   );
 };

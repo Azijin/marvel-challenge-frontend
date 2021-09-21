@@ -1,3 +1,6 @@
+/*
+loader to display while waiting for the return of the request
+*/
 import LoadingIndicator from "../assets/img/loading-indicator.gif";
 import marvelAnimation from "../assets/img/marvel-animation.gif";
 

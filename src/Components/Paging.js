@@ -11,7 +11,7 @@ const Paging = (props) => {
           pageRangeDisplayed={9}
           breakLabel={"..."}
           previousLabel={"previous"}
-          nextLabel={"next"}
+          nextLabel={numberOfPages > 0 && "next"}
           containerClassName=""
           activeLinkClassName="actual-page"
           disabledClassName="disabled-pagination"

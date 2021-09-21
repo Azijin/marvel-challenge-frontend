@@ -1,3 +1,7 @@
+/*
+Favorites pages
+*/
+
 import { Redirect, Link } from "react-router-dom";
 
 import Loading from "../Components/Loading";
@@ -11,10 +15,9 @@ const Favorites = (props) => {
     addFavorite,
     removeFavorite,
   } = props;
+
   const characters = favorites ? favorites.characters : [];
   const comics = favorites ? favorites.comics : [];
-
-  console.log(`Favorites page : favorites is ${favorites}`);
 
   return authToken ? (
     favorites ? (
@@ -32,11 +35,11 @@ const Favorites = (props) => {
                 return (
                   <Card
                     key={index}
+                    pageContent="comics"
                     title={comic.title}
                     picture={comic.thumbnail.path}
                     extension={comic.thumbnail.extension}
                     id={comic.id}
-                    pageContent="comics"
                     favorites={favorites}
                     isInFavorites={isInFavorites}
                     addFavorite={addFavorite}
@@ -65,6 +68,7 @@ const Favorites = (props) => {
                     picture={character.thumbnail.path}
                     extension={character.thumbnail.extension}
                     id={character.id}
+                    favorites={favorites}
                     isInFavorites={isInFavorites}
                     addFavorite={addFavorite}
                     removeFavorite={removeFavorite}

@@ -14,7 +14,8 @@ h2 {
   font-size: calc(24px * var(--scale));
   text-transform: uppercase;
 }
-p {
+p,
+button {
   color: white;
   font-family: "Roboto Condensed", sans-serif;
   font-size: calc(20px * var(--scale));
@@ -33,11 +34,13 @@ select {
   outline: none;
   cursor: pointer;
 }
-/*PAGE404*/
-.page404 {
-  height: 75vh;
+/*PAGE404 && PAGE ERROR*/
+.page404,
+.page-error {
+  height: 80vh;
 }
-.page404-container {
+.page404-container,
+.page-error {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,7 +59,16 @@ select {
   width: 100%;
   height: 100%;
 }
-
+.page-error button {
+  margin-top: 20px;
+  padding: 5px 20px;
+  background-color: #ed1d25;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  color: white;
+  outline: none;
+  border: none;
+}
 /*HEADER RULES*/
 header {
   height: 15vh;
@@ -163,6 +175,9 @@ header .marvel-logo {
   height: 80vh;
   padding: 30px;
 }
+.form-container input:disabled {
+  cursor: not-allowed;
+}
 .form-container h2 {
   font-size: calc(30px * var(--scale));
   text-transform: uppercase;
@@ -195,10 +210,12 @@ header .marvel-logo {
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
   color: #ed1d25;
+  font-size: calc(20px * var(--scale));
 }
 .form-container input::placeholder {
   font-family: "Roboto Condensed", sans-serif;
   color: white;
+  font-size: calc(20px * var(--scale));
 }
 
 .password-container {
@@ -210,16 +227,22 @@ header .marvel-logo {
   top: 40%;
   color: #ed1d25;
 }
-.form-container button {
+.form-container button,
+.account-container button {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   background-color: #ed1d25;
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
   color: white;
   outline: none;
   border: none;
-  width: 15vh;
+  border-radius: 5px;
+}
+.form-container .btn-not-clickable {
+  background-color: #9b9899;
+  color: black;
+  cursor: not-allowed;
 }
 .error-alerts {
   margin-top: 10px;
@@ -231,6 +254,35 @@ header .marvel-logo {
 }
 .form-container a {
   font-size: calc(12px * var(--scale));
+}
+/*MODAL SIGNIN*/
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #141414;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modal-close {
+  display: none;
+}
+.modal-open {
+  display: block;
+}
+.modal a {
+  font-size: calc(20px * var(--scale));
 }
 /* SEARCH CONTAINER */
 .search-container {
@@ -382,7 +434,7 @@ header .marvel-logo {
   padding: 10px 0;
 }
 .card-title p {
-  font-size: calc(18px * var(--scale));
+  font-size: calc(12px * var(--scale));
 }
 .card-description {
   display: flex;
@@ -478,14 +530,18 @@ header .marvel-logo {
 .account-infos p > span {
   color: #ed1d25;
 }
+.infos {
+  margin: 15px 0;
+}
 /* FAVORITES RULES */
 .favorites-page {
-  height: 80vh;
+  min-height: 40vh;
   padding: 0 20px;
 }
 .favorites-page {
   display: flex;
   justify-content: space-between;
+  height: 80vh;
 }
 .favorites-page section {
   display: flex;
@@ -509,6 +565,16 @@ header .marvel-logo {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.favorites-container::-webkit-scrollbar {
+  display: none;
+}
+.favorites-container .card {
+  width: 20%;
 }
 /* FOOTER RULES */
 .Footer {
@@ -549,18 +615,18 @@ header .marvel-logo {
 }
 .signature > p > img:first-child,
 .signature > p > img:nth-child(3) {
-  width: 40px;
-  height: 40px;
+  width: calc(40px * var(--scale));
+  height: calc(40px * var(--scale));
   vertical-align: middle;
   animation: App-logo-spin infinite 20s linear;
 }
 .signature > p > a > img {
-  width: 120px;
+  width: calc(120px * var(--scale));
   vertical-align: middle;
 }
 .signature :nth-child(2) img {
-  width: 40px;
-  height: 40px;
+  width: calc(40px * var(--scale));
+  height: calc(40px * var(--scale));
   vertical-align: middle;
 }
 .signature div a:link {
@@ -605,6 +671,22 @@ header .marvel-logo {
   }
   header > div {
     border: none;
+  }
+  .input-container {
+    width: 45%;
+  }
+  .isLoading {
+    height: 80vh;
+  }
+  .isLoading,
+  .isLoading-container > div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+  .isLoading img {
+    max-width: 80%;
   }
 }
 

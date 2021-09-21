@@ -3,8 +3,16 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const InputPassword = (props) => {
-  const { value, setPassword, handleState, displayTips } = props;
+  const {
+    value,
+    setPassword,
+    handleState,
+    displayTips,
+    isDisabled,
+    type,
+  } = props;
   const [showPassword, setShowPassword] = useState(false);
+
   const handleShowPassword = () => {
     if (showPassword) {
       setShowPassword(false);
@@ -20,10 +28,10 @@ const InputPassword = (props) => {
         type={showPassword ? "text" : "password"}
         name="password"
         placeholder="StR0ng-Pa55w0rD-L1k3-HulK"
-        required
+        disabled={isDisabled}
         value={value}
         onChange={(e) => {
-          handleState(e.target.value, setPassword);
+          type == "join" && handleState(e.target.value, setPassword);
         }}
         onClick={displayTips}
       />

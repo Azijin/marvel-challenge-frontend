@@ -7,7 +7,8 @@ import axios from "axios";
 import "../src/assets/css/reset.css";
 import "../src/assets/css/App.css";
 
-import Page404 from "./Components/Page404";
+import Page404 from "./Pages/Page404";
+import PageError from "./Pages/PageError";
 import Header from "./Components/Header";
 import Join from "./Pages/Join";
 import Signin from "./Pages/Signin";
@@ -32,7 +33,7 @@ import {
   faTrash,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import userEvent from "@testing-library/user-event";
+
 library.add(
   faSearch,
   faEye,
@@ -71,25 +72,24 @@ function App() {
     }
   };
 
-  const removeFavorite = (favorite, type) => {
+  const removeFavorite = (id, type) => {
     const newFavorites = { ...favorites };
-    const indexFavorite = newFavorites[type].indexOf(favorite);
-    if (indexFavorite !== -1) {
-      newFavorites[type].slice(indexFavorite, 1);
-      handleUpdateAccount({ favorites: newFavorites });
-    }
+    newFavorites[type] = newFavorites[type].filter(
+      (favorite) => favorite.id !== id
+    );
+    handleUpdateAccount({ favorites: newFavorites });
   };
 
-  const isInFavorites = (favoriteId, type, setIsInFavorite) => {
+  const isInFavorites = (favoriteId, type, setFavorite) => {
+    let isFavorite = false;
     if (favorites) {
       favorites[type].forEach((favorite) => {
         if (favorite.id === favoriteId) {
-          setIsInFavorite(true);
-        } else {
-          setIsInFavorite(false);
+          isFavorite = true;
         }
       });
     }
+    setFavorite(isFavorite);
   };
 
   const handleSkip = (range, limit, callback) => {
@@ -125,6 +125,8 @@ function App() {
   useEffect(() => {
     if (authToken) {
       getUserAccount();
+    } else {
+      setAccount(null);
     }
   }, [authToken]);
 
@@ -133,8 +135,7 @@ function App() {
       setFavorites(account.favorites);
     }
   }, [account]);
-  console.log(account);
-  console.log(favorites);
+
   return (
     <Router>
       <Header account={account} handleLogout={handleLogout} />
@@ -143,11 +144,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/join">
-          <Join
-            account={account}
-            handleState={handleState}
-            handleLogin={handleLogin}
-          />
+          <Join account={account} handleState={handleState} />
         </Route>
         <Route path="/signin">
           <Signin
@@ -160,8 +157,7 @@ function App() {
           <Account
             account={account}
             authToken={authToken}
-            handleState={handleState}
-            getUserAccount={getUserAccount}
+            handleLogout={handleLogout}
           />
         </Route>
         <Route path="/favorites">
@@ -208,6 +204,9 @@ function App() {
             addFavorite={addFavorite}
             removeFavorite={removeFavorite}
           />
+        </Route>
+        <Route path="/error">
+          <PageError />
         </Route>
         <Route path="*">
           <Page404 />

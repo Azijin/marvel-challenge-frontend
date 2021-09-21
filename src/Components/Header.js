@@ -14,7 +14,12 @@ const Header = (props) => {
         }}
       >
         {account && (
-          <FontAwesomeIcon icon="sign-out-alt" onClick={handleLogout} />
+          <FontAwesomeIcon
+            icon="sign-out-alt"
+            onClick={() => {
+              handleLogout();
+            }}
+          />
         )}
       </div>
       <div className="options forms">
